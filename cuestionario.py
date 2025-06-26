@@ -3,7 +3,7 @@ import streamlit as st
 st.set_page_config(page_title="Cuestionario sobre Trastornos Mentales", layout="centered")
 st.title("🧠 Cuestionario sobre Trastornos Mentales")
 
-# Lista de preguntas, opciones, respuestas y retroalimentación
+# Lista de preguntas
 questions = [
     {
         "question": "¿Cuál de los siguientes trastornos se caracteriza principalmente por períodos de euforia y depresión?",
@@ -100,9 +100,8 @@ if st.session_state.index < len(questions):
             st.session_state.index += 1
             st.session_state.answered = False
             st.session_state.correct = False
-            st.experimental_set_query_params()  # limpia la URL
-            st.stop()  # reinicia renderizado de forma segura
-
+            st.query_params.clear()  # ✅ versión actualizada para limpiar la URL
+            st.stop()  # detiene ejecución para nueva pregunta
 else:
     st.balloons()
     st.success("🎉 ¡Felicidades! Has completado el cuestionario.")
